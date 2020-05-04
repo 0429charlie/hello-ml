@@ -1038,7 +1038,7 @@ def evaluate_image():
     # _ is the probability and idx is the index of the highest probability returned.
     _, idx = torch.max(out,1)
     # Use .item() to get the number from tensor
-    return idtoclass(idx[0].item())
+    return idtoclass[idx[0].item()]
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
