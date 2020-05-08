@@ -11,7 +11,7 @@ import PIL
 from PIL import Image
 import copy
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -1029,7 +1029,7 @@ idtoclass = {0: 'tench, Tinca tinca',
 
 @app.route('/predict', methods=['POST'])
 def evaluate_image():
-    img = request.files["image"]
+    img = request.files['photo']
     img_t = validate_transform(img)
     batch_t = torch.unsqueeze(img_t, 0)
     model.eval()
@@ -1038,7 +1038,7 @@ def evaluate_image():
     # _ is the probability and idx is the index of the highest probability returned.
     _, idx = torch.max(out,1)
     # Use .item() to get the number from tensor
-    return idtoclass[idx[0].item()]
+    return jsonify({'text':idtoclass[idx[0].item()]})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
