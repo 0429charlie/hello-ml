@@ -93,7 +93,7 @@ print(request.get_json()['formData']['_parts'][0][1]['data'])
 
 Set up Dev Environment
 ---
-This project is created using Pycharm, an IDE by JetBrains. The following is a way to create dev environment in Pycharm but any setup with Python3 and Flask will work.<br>
+This project is created using Pycharm, an IDE by JetBrains. The following is a way to create dev environment in Pycharm but any setup with Python3, Flask, and Pytorch will work.<br>
 1. Download Anaconda.<br>
 2. Create environment that we need. This can be done with the Anacaonda UI.<br>
 3. Install the required package using Anaconda prompt. The following is an example of installing flask.<br>
