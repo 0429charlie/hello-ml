@@ -93,16 +93,50 @@ print(request.get_json()['formData']['_parts'][0][1]['data'])
 
 Set up Dev Environment
 ---
-To be update
+This project is created using Pycharm, an IDE by JetBrains. The following is a way to create dev environment in Pycharm but any setup with Python3 and Flask will work.<br>
+1. Download Anaconda.<br>
+2. Create environment that we need. This can be done with the Anacaonda UI.<br>
+3. Install the required package using Anaconda prompt. The following is an example of installing flask.<br>
+    ```
+    conda env list    # List all the environment
+    activate Pytorch  # Activate the chosen environment (Pytorch in this case)
+    pip install Flask   #install package as instructed on official website
+    ```
+4. Create new project and set the interpreter using the existing interpreter. You should see the environment you created in conda to choose from.<br>
+
+*For cloning the project, just clone normally and set the interpreter later.<br>
 
 Test Locally
 ---
-To be update
+In Pycharm, the program can be launch by clicking the run button. If not using Pycharm, just run python hello-ml.py in the project root.<br>
+
+However, before running, note the port you are running on. For example, locate something like app.run(host='0.0.0.0', port=80) in your main function. It mean you are exposing endpoint on port 80. Then in the frontend, use http://[local ip]:[port]/[endpoint] for the fetch url. local ip can be acquired by typing ipconfig in command prompt.<br>
 
 Deploy on GCP using Cloud Run
 ---
-To be update
+Can be done with the following:<br>
+1.	Open cloud shell<br>
+2.	git clone the project<br>
+3.	cd into the project<br>
+4.	Get your project id<br>
+    gcloud config get-value project<br>
+5.	Build container image.<br>
+    gcloud builds submit --tag gcr.io/[PROJECT-ID]/[app_name]<br>
+6.	Deploy Cloud Run using the UI from GCP<br>
+6.1 Will be prompt for service name and region, and please allow authentication.<br>
+6.2 Note that container port must match to port in Docker file.<br>
+6.3 Also don’t forget to allocate enough memory.<br>
+7.	On success, note the service URL.<br>
 
 Deploy on AWS EC2 (VM) or equivalent
 ---
-To be update
+1.	Set up and es2 instance (from ec2 select Key Pairs).<br>
+2.	SSH into the created instance.<br>
+2.1 Use the right url. For example, ec2-user@ec2-15-223-118-63.ca-central-1.compute.amazonaws.com<br>
+3.	Clone the project<br>
+4.	Run docker build -t [project name] .<br>
+5.	Run docker run -p 80:80 [project name]<br>
+6.	Now, the backend is ready and listening!<br>
+
+For generating key for putty:<br>
+Puttygen->load->save private key<br>
